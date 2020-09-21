@@ -34,8 +34,9 @@ const Styles = styled.div`
         color: white;
         ${isMobile ? 
           `    
-          font-size: calc(4vh);
-          left: calc(25vw);
+          font-size: calc(8vh);
+          top: 0;
+          left: calc(39vw);
           `
           :
           `
@@ -58,8 +59,9 @@ const Styles = styled.div`
         border-radius: 50px;
         ${isMobile ?
           `
-          top: calc(25%);
-          
+          top: calc(18%);
+          height: calc(60%);
+          width: calc(80%);
           `
           :
           `
@@ -78,7 +80,9 @@ const Styles = styled.div`
         border-radius: 25px;
         ${isMobile ?
           `
-          top: calc(25%);
+          top: calc(83%);
+          height: calc(10%);
+          width: calc(90%);
           
           `
           :
@@ -90,12 +94,35 @@ const Styles = styled.div`
         }
     }
 
+    .repaymentType{
+        position: absolute;
+        z-index: 2;
+        ${isMobile ? 
+          `    
+          font-size: calc(4vh);
+          top: 23%;
+          left: calc(25vw);
+          `
+          :
+          `
+          font-size: calc(4vw);
+          top: 23%;
+          left: calc(25vw);
+          `
+        }
+        font-weight: bold;
+        justify-content: center;
+        align-items: center;
+        display: inline-block;
+      }
+
     .size{
         position: absolute;
         z-index: 2;
         ${isMobile ? 
           `    
           font-size: calc(4vh);
+          top: 33%;
           left: calc(25vw);
           `
           :
@@ -117,6 +144,7 @@ const Styles = styled.div`
         ${isMobile ? 
           `    
           font-size: calc(4vh);
+          top: 43%;
           left: calc(25vw);
           `
           :
@@ -138,6 +166,7 @@ const Styles = styled.div`
         ${isMobile ? 
           `    
           font-size: calc(4vh);
+          top: 53%;
           left: calc(25vw);
           `
           :
@@ -159,6 +188,7 @@ const Styles = styled.div`
         ${isMobile ? 
           `    
           font-size: calc(4vh);
+          top: 63%;
           left: calc(25vw);
           `
           :
@@ -174,34 +204,14 @@ const Styles = styled.div`
         display: inline-block;
       }
 
-      .repaymentType{
-        position: absolute;
-        z-index: 2;
-        ${isMobile ? 
-          `    
-          font-size: calc(4vh);
-          left: calc(25vw);
-          `
-          :
-          `
-          font-size: calc(4vw);
-          top: 23%;
-          left: calc(25vw);
-          `
-        }
-        font-weight: bold;
-        justify-content: center;
-        align-items: center;
-        display: inline-block;
-      }
-
       .result{
         position: absolute;
         z-index: 2;
         ${isMobile ? 
           `    
           font-size: calc(4vh);
-          left: calc(25vw);
+          top: 83%;
+          left: calc(15vw);
           `
           :
           `
@@ -221,8 +231,9 @@ const Styles = styled.div`
         z-index: 2;
         ${isMobile ? 
           `    
-          font-size: calc(4vh);
-          left: calc(25vw);
+          font-size: calc(2vh);
+          top: calc(88% - 3.5vmin);
+          left: 92%;
           `
           :
           `
