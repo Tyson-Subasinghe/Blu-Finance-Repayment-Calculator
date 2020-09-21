@@ -86,10 +86,10 @@ const Styles = styled.div`
         border-radius: 25px;
         ${isMobile ?
           `
-          top: calc(83%);
-          height: calc(10%);
-          width: calc(100%);
-          border-radius: 0;
+          top: calc(80%);
+          height: calc(12%);
+          width: calc(95%);
+          border-radius: 25px;
           `
           :
           `
@@ -247,13 +247,13 @@ const Styles = styled.div`
         ${isMobile ? 
             `    
             font-size: calc(4vh);
-            top: 83%;
+            top: 81%;
+            left: calc(50% - 7ch);
             `
             :
             `
             font-size: calc(4vw);
             top: 83%;
-            
             `
         }
         font-weight: bold;
@@ -266,24 +266,27 @@ const Styles = styled.div`
         position: absolute;
         z-index: 2;
         ${isMobile ? 
-          `    
-          font-size: calc(2vh);
-          top: calc(88% - 3.5vmin);
-          left: 92%;
-          `
-          :
-          `
-          font-size: calc(2vw);
-          top: calc(88% - 5vmin);
-          left: calc(93% - 5vmin);
-          `
+            `    
+            font-size: calc(2vh);
+            top: calc(96.5% - 5vh);
+            left: calc(50% - 5vh);
+            width: calc(10vh);
+            height: calc(10vh);
+            `
+            :
+            `
+            font-size: calc(2vw);
+            top: calc(88% - 5vh);
+            left: calc(93% - 5vh);
+            width: calc(10vh);
+            height: calc(10vh);
+            `
         }
         display: inline-block;
         
         border-radius: 50%;
         position: absolute;
-        width: calc(10vmin);
-        height: calc(10vmin);
+        
         
         justify-content: center;
         align-items: center;
@@ -697,12 +700,12 @@ export const Calculator = () => {
                         </motion.div>
                         
                         <motion.div className="result">
-                            {workOutRepayments(size,rate,term,frequency,repaymentType)}
+                            {workOutRepayments(size,rate,term,frequency,repaymentType)}{" "}{frequency}
                             
                         </motion.div>
 
                         <IconButton className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType)+" "+frequency)}}>
-                            <img src={copy} style={{height:'4vmin', width:'4vmin'}} alt="copy"/>
+                            <img src={copy} style={{height:'4vh', width:'4vh'}} alt="copy"/>
                         </IconButton>
                     </MobileView>
                 
