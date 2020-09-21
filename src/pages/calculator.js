@@ -471,7 +471,8 @@ export const Calculator = () => {
                         }}>
                             For a loan of $
                             <FormControl size="small">
-                                <InputBase
+                                <InputBase 
+                                    type="number"
                                     id="standard-adornment-size"
                                     value={size}
                                     onChange={e => sanitiseAndSetSize(e.target.value)}
@@ -498,7 +499,7 @@ export const Calculator = () => {
                             with a rate of 
                             <FormControl size="small">
                                 <InputBase
-                                    
+                                    type="number"
                                     id="standard-adornment-rate"
                                     value={rate}
                                     onChange={e => sanitiseAndSetRate(e.target.value)}
@@ -512,7 +513,7 @@ export const Calculator = () => {
                                     
                                 />
                             </FormControl>
-                            % p.a. ,
+                            % p.a. 
                         </motion.div>
                         <motion.div className="term"
                         initial={{
@@ -530,6 +531,7 @@ export const Calculator = () => {
                             a loan term of
                             <FormControl size="small">
                                 <InputBase 
+                                    type="number"
                                     id="standard-adornment-term"
                                     value={term}
                                     onChange={e => sanitiseAndSetTerm(e.target.value)}
@@ -712,6 +714,7 @@ export const Calculator = () => {
                         }}>
                             <FormControl size="small">
                                 <InputBase
+                                    type="number"
                                     id="standard-adornment-size"
                                     value={size}
                                     onChange={e => sanitiseAndSetSize(e.target.value)}
@@ -742,6 +745,7 @@ export const Calculator = () => {
                                 <InputBase
                                 
                                     id="standard-adornment-rate"
+                                    type="number"
                                     value={rate}
                                     onChange={e => sanitiseAndSetRate(e.target.value)}
                                     style={{
@@ -771,9 +775,10 @@ export const Calculator = () => {
                             duration: 0.5
                         }}>
                             <span style={{fontWeight: "bold"}}>Loan term:</span>
-                            <FormControl size="small">
+                            <FormControl size="small" >
                                 <InputBase 
                                     id="standard-adornment-term"
+                                    type="number"
                                     value={term}
                                     onChange={e => sanitiseAndSetTerm(e.target.value)}
                                     style={{
@@ -864,7 +869,7 @@ export const Calculator = () => {
                             delay: 0.5,
                             duration: 0.5
                         }}>
-                            <span style={{fontWeight: "bold"}}>Frequency</span>
+                            <span style={{fontWeight: "bold"}}>Frequency:</span>
                         </motion.div>
                         
                         <motion.div className="frequencyBox"
