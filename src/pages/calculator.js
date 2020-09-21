@@ -427,13 +427,48 @@ export const Calculator = () => {
                     Blu
                 </motion.div>
 
-                <motion.div className="inputBoxContainer"/>
-                <motion.div className="outputBoxContainer"/>
+                <motion.div className="inputBoxContainer"
+                initial={{
+                    opacity: 0,
+                    y: 50,
+                }}
+                animate={{
+                    opacity: 1,
+                    y: 0,
+                }}
+                transition={{
+                    duration: 0.5
+                }}/>
+                <motion.div className="outputBoxContainer"
+                initial={{
+                    opacity: 0,
+                    y: 0,
+                }}
+                animate={{
+                    opacity: 1,
+                    y: 0,
+                }}
+                transition={{
+                    delay: 0.6,
+                    duration: 0.5
+                }}/>
                     
                     <BrowserView>
                         
 
-                        <motion.div className="size">
+                        <motion.div className="size"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.1,
+                            duration: 0.5
+                        }}>
                             For a loan of $
                             <FormControl size="small">
                                 <InputBase
@@ -447,7 +482,19 @@ export const Calculator = () => {
                                 />
                             </FormControl>
                         </motion.div>
-                        <motion.div className="rate">
+                        <motion.div className="rate"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.2,
+                            duration: 0.5
+                        }}>
                             with a rate of 
                             <FormControl size="small">
                                 <InputBase
@@ -467,7 +514,19 @@ export const Calculator = () => {
                             </FormControl>
                             % p.a. ,
                         </motion.div>
-                        <motion.div className="term">
+                        <motion.div className="term"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.3,
+                            duration: 0.5
+                        }}>
                             a loan term of
                             <FormControl size="small">
                                 <InputBase 
@@ -488,7 +547,19 @@ export const Calculator = () => {
                         </motion.div>
                         
                         
-                        <motion.div className="repaymentType">
+                        <motion.div className="repaymentType"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.4,
+                            duration: 0.5
+                        }}>
                             and 
                             <FormControl size="small">
                                 
@@ -521,12 +592,36 @@ export const Calculator = () => {
                             
                         </motion.div>
 
-                        <motion.div className="repaymentTypeText">
+                        <motion.div className="repaymentTypeText"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.5,
+                            duration: 0.5
+                        }}>
                             repayments
                         </motion.div>
                         
                         
-                        <motion.div className="result">
+                        <motion.div className="result"
+                        initial={{
+                            opacity: 0,
+                            y: 0,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 1,
+                            duration: 0.5
+                        }}>
                             {workOutRepayments(size,rate,term,frequency,repaymentType)}
                             <FormControl size="small">
                                 <Select
@@ -566,13 +661,55 @@ export const Calculator = () => {
 
 
 
-                    <MobileView>
-                    
 
-                        <motion.div className="sizeText">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <MobileView>
+
+                        <motion.div className="sizeText"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.1,
+                            duration: 0.5
+                        }}>
                             <span style={{fontWeight: "bold"}}>Loan size:</span> $
                         </motion.div>
-                        <motion.div className="sizeBox">
+                        <motion.div className="sizeBox"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.1,
+                            duration: 0.5
+                        }}>
                             <FormControl size="small">
                                 <InputBase
                                     id="standard-adornment-size"
@@ -587,7 +724,19 @@ export const Calculator = () => {
                                 />
                             </FormControl>
                         </motion.div>
-                        <motion.div className="rate">
+                        <motion.div className="rate"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.2,
+                            duration: 0.5
+                        }}>
                             <span style={{fontWeight: "bold"}}>Rate: </span>
                             <FormControl size="small">
                                 <InputBase
@@ -608,7 +757,19 @@ export const Calculator = () => {
                             </FormControl>
                             % p.a.
                         </motion.div>
-                        <motion.div className="term">
+                        <motion.div className="term"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.3,
+                            duration: 0.5
+                        }}>
                             <span style={{fontWeight: "bold"}}>Loan term:</span>
                             <FormControl size="small">
                                 <InputBase 
@@ -629,11 +790,35 @@ export const Calculator = () => {
                            years
                         </motion.div>
                         
-                        <motion.div className="repaymentTypeText" >
+                        <motion.div className="repaymentTypeText" 
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.4,
+                            duration: 0.5
+                        }}>
                             <span style={{fontWeight: "bold"}}>Repayment type:</span>
                         </motion.div>
 
-                        <motion.div className="repaymentType">
+                        <motion.div className="repaymentType"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.4,
+                            duration: 0.5
+                        }}>
                             
                             <FormControl size="small">
                                 
@@ -666,11 +851,35 @@ export const Calculator = () => {
                             
                         </motion.div>
 
-                        <motion.div className="frequencyText" >
+                        <motion.div className="frequencyText" 
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.5,
+                            duration: 0.5
+                        }}>
                             <span style={{fontWeight: "bold"}}>Frequency</span>
                         </motion.div>
                         
-                        <motion.div className="frequencyBox">
+                        <motion.div className="frequencyBox"
+                        initial={{
+                            opacity: 0,
+                            y: 50,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 0.5,
+                            duration: 0.5
+                        }}>
                             <FormControl size="small">
                                 <Select
                                 disableUnderline
@@ -702,7 +911,19 @@ export const Calculator = () => {
                             </FormControl>
                         </motion.div>
                         
-                        <motion.div className="result">
+                        <motion.div className="result"
+                        initial={{
+                            opacity: 0,
+                            y: 0,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            delay: 1,
+                            duration: 0.5
+                        }}>
                             {workOutRepayments(size,rate,term,frequency,repaymentType)}{" "}{frequency}
                             
                         </motion.div>
