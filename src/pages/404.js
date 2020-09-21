@@ -20,6 +20,29 @@ const Styles = styled.div`
   height: 100vh;
 }
 
+.title{
+        
+    position: absolute;
+    z-index: 2;
+    color: white;
+    ${isMobile ? 
+      `    
+      font-size: calc(8vh);
+      top: 0;
+      left: calc(39vw);
+      `
+      :
+      `
+      font-size: calc(8vw);
+      top: 0;
+      `
+    }
+    font-family: Aileron;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    display: inline-block;
+  }
 
 .toptext{
   
@@ -64,9 +87,12 @@ export const NoMatch = () => {
           <div className="background">
             <motion.div className="container" >
 
+                <motion.div className="title">
+                    Blu
+                </motion.div>
                 <div>
-                  <p className="toptext">No page found :(</p>
-                  <p className="subtext">Sorry about that</p>
+                  <p className="toptext">No other pages :(</p>
+                  <p className="subtext">This website only contains one page</p>
                 </div>
 
             </motion.div>

@@ -27,9 +27,14 @@ const Styles = styled.div`
         background: linear-gradient(180deg, #05f, #09f);
         background-repeat: no-repeat;
         display: flex;
+        overflow: hidden;
+       
     }
 
+    
+
     .title{
+        
         position: absolute;
         z-index: 2;
         color: white;
@@ -42,11 +47,11 @@ const Styles = styled.div`
           :
           `
           font-size: calc(8vw);
-          top: -1%;
-          left: calc(45vw);
+          top: 0;
           `
         }
-        font-weight: bold;
+        font-family: Aileron;
+        font-weight: bolder;
         justify-content: center;
         align-items: center;
         display: inline-block;
@@ -95,28 +100,6 @@ const Styles = styled.div`
         }
     }
 
-    .repaymentType{
-        position: absolute;
-        z-index: 2;
-        ${isMobile ? 
-          `    
-          font-size: calc(4vh);
-          top: 23%;
-          left: calc(25vw);
-          `
-          :
-          `
-          font-size: calc(4vw);
-          top: 23%;
-          left: calc(25vw);
-          `
-        }
-        font-weight: bold;
-        justify-content: center;
-        align-items: center;
-        display: inline-block;
-      }
-
     .size{
         position: absolute;
         z-index: 2;
@@ -129,11 +112,11 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 33%;
+          top: 23%;
           left: calc(25vw);
           `
         }
-        font-weight: bold;
+        
         justify-content: center;
         align-items: center;
         display: inline-block;
@@ -151,11 +134,10 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 43%;
+          top: 33%;
           left: calc(25vw);
           `
         }
-        font-weight: bold;
         justify-content: center;
         align-items: center;
         display: inline-block;
@@ -173,17 +155,16 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 53%;
+          top: 43%;
           left: calc(25vw);
           `
         }
-        font-weight: bold;
         justify-content: center;
         align-items: center;
         display: inline-block;
       }
 
-      .frequency{
+      .repaymentType{
         position: absolute;
         z-index: 2;
         ${isMobile ? 
@@ -195,15 +176,35 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 63%;
+          top: 53%;
           left: calc(25vw);
           `
         }
-        font-weight: bold;
         justify-content: center;
         align-items: center;
         display: inline-block;
       }
+
+    .repaymentTypeLine2{
+        position: absolute;
+        z-index: 2;
+        ${isMobile ? 
+            `    
+            font-size: calc(4vh);
+            top: 73%;
+            left: calc(25vw);
+            `
+            :
+            `
+            font-size: calc(4vw);
+            top: 63%;
+            left: calc(25vw);
+            `
+        }
+        justify-content: center;
+        align-items: center;
+        display: inline-block;
+    }
 
       .result{
         position: absolute;
@@ -218,7 +219,7 @@ const Styles = styled.div`
           `
           font-size: calc(4vw);
           top: 83%;
-          left: calc(15vw);
+          
           `
         }
         font-weight: bold;
@@ -243,7 +244,6 @@ const Styles = styled.div`
           left: calc(93% - 5vmin);
           `
         }
-        font-weight: bold;
         display: inline-block;
         
         border-radius: 50%;
@@ -314,9 +314,9 @@ function workOutRepayments(size,rate,term,frequency,repaymentType){
     }
 
     if(repaymentType == "principal and interest"){
-        return "Repayments are $" + (PMT(rate/1200,term*12,size)*(12/nPeriods)).toFixed(2) + " " + frequency;
+        return "Repayments are $" + (PMT(rate/1200,term*12,size)*(12/nPeriods)).toFixed(2);
     }else if(repaymentType == "interest only"){
-        return "Repayments are $" + (size*(rate/100)/nPeriods).toFixed(2) + " " + frequency;
+        return "Repayments are $" + (size*(rate/100)/nPeriods).toFixed(2);
     }else{
         return "Enter a repayment type";
     }
@@ -375,19 +375,6 @@ export const Calculator = () => {
         
     };
 
-    const aOrAn = (repaymentType) => {
-
-        
-        if(repaymentType==="principal and interest"){
-            return;
-        }else if(repaymentType==="interest only"){
-            return "n";
-        }else{
-            return "error";
-        }
-        
-    };
-
     
     
 
@@ -403,7 +390,7 @@ export const Calculator = () => {
                 <motion.div className="outputBoxContainer"/>
                     
                     <motion.div className="repaymentType">
-                        For a{aOrAn(repaymentType)}
+                        and 
                         <FormControl size="small">
                             
                             <Select
@@ -419,7 +406,6 @@ export const Calculator = () => {
                             style={{
                                 color:'#ffffff',
                                 fontSize: '4vw',
-                                fontWeight: 'bold',
                                 marginLeft: '0.25em',
                             }}>
                                 <MenuItem disabled value="">
@@ -433,10 +419,15 @@ export const Calculator = () => {
                                 ))}
                             </Select>
                         </FormControl>
+                         
+                    </motion.div>
+
+                    <motion.div className="repaymentTypeLine2">
+                        repayments
                     </motion.div>
 
                     <motion.div className="size">
-                        loan of $
+                        For a loan of $
                         <FormControl size="small">
                             <InputBase
                                 id="standard-adornment-size"
@@ -445,7 +436,6 @@ export const Calculator = () => {
                                 style={{
                                     color:'#ffffff',
                                     fontSize: '4vw',
-                                    fontWeight: 'bold',
     
                                 }}
                             />
@@ -462,7 +452,6 @@ export const Calculator = () => {
                                 style={{
                                     color:'#ffffff',
                                     fontSize: '4vw',
-                                    fontWeight: 'bold',
                                     marginLeft: '0.25em',
                                     width: "3.6ch",
                                 }}
@@ -470,7 +459,7 @@ export const Calculator = () => {
                                 
                             />
                         </FormControl>
-                        % p.a.
+                        % p.a. ,
                     </motion.div>
                     <motion.div className="term">
                         a loan term of
@@ -482,7 +471,6 @@ export const Calculator = () => {
                                 style={{
                                     color:'#ffffff',
                                     fontSize: '4vw',
-                                    fontWeight: 'bold',
                                     marginLeft: '0.25em',
                                     width: '2.5ch',
                                 }}
@@ -493,8 +481,12 @@ export const Calculator = () => {
                          years
                     </motion.div>
                     
-                    <motion.div className="frequency">
-                         and repayments
+                    
+
+                    
+                    
+                    <motion.div className="result">
+                        {workOutRepayments(size,rate,term,frequency,repaymentType)}
                         <FormControl size="small">
                             <Select
                             disableUnderline
@@ -509,8 +501,8 @@ export const Calculator = () => {
                             style={{
                                 color:'#ffffff',
                                 fontSize: '4vw',
-                                fontWeight: 'bold',
                                 marginLeft: '0.25em',
+                                fontWeight: 'bold',
                                 
                             }}
                             >
@@ -526,13 +518,7 @@ export const Calculator = () => {
                             </Select>
                         </FormControl>
                     </motion.div>
-
-                    
-                    
-                    <motion.div className="result">
-                        {workOutRepayments(size,rate,term,frequency,repaymentType)}
-                    </motion.div>
-                    <IconButton className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType))}}>
+                    <IconButton className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType)+" "+frequency)}}>
                         <img src={copy} style={{height:'4vmin', width:'4vmin'}} alt="copy"/>
                     </IconButton>
                 
