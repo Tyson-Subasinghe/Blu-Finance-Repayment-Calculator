@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import styled from 'styled-components';
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {isMobile} from "react-device-detect";
 
 import Input from '@material-ui/core/Input';
@@ -9,13 +9,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-
-import FilledInput from '@material-ui/core/FilledInput';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import InputBase from '@material-ui/core/InputBase';
-import { makeStyles } from '@material-ui/core/styles';
+
 import copy from '../assets/copy.png';
 
 
@@ -272,12 +267,12 @@ function PMT(rate, nperiod, pv, fv, type) {
     if (!fv) fv = 0;
     if (!type) type = 0;
 
-    if (rate == 0) return (pv + fv)/nperiod;
+    if (rate === 0) return (pv + fv)/nperiod;
 
     var pvif = Math.pow(1 + rate, nperiod);
     var pmt = rate / (pvif - 1) * -(pv * pvif + fv);
 
-    if (type == 1) {
+    if (type === 1) {
         pmt /= (1 + rate);
     };
 
@@ -302,13 +297,13 @@ function workOutRepayments(size,rate,term,frequency,repaymentType){
         return "Enter a frequency";
     }
 
-    if(term==0){
+    if(term===0){
         return "Enter a loan term";
     }
 
-    if(repaymentType == "principal and interest"){
+    if(repaymentType === "principal and interest"){
         return "Repayments are $" + (PMT(rate/1200,term*12,size)*(12/nPeriods)).toFixed(2) + " " + frequency;
-    }else if(repaymentType == "interest only"){
+    }else if(repaymentType === "interest only"){
         return "Repayments are $" + (size*(rate/100)/nPeriods).toFixed(2) + " " + frequency;
     }else{
         return "Enter a repayment type";
@@ -371,9 +366,9 @@ export const Calculator = () => {
     const aOrAn = (repaymentType) => {
 
         
-        if(repaymentType=="principal and interest"){
+        if(repaymentType==="principal and interest"){
             return;
-        }else if(repaymentType=="interest only"){
+        }else if(repaymentType==="interest only"){
             return "n";
         }else{
             return "error";
@@ -398,8 +393,10 @@ export const Calculator = () => {
                     <motion.div className="repaymentType">
                         For a{aOrAn(repaymentType)}
                         <FormControl size="small">
+                            
                             <Select
                             disableUnderline
+                            IconComponent = {"none"}
                             value={repaymentType}
                             onChange={e => setRepaymentType(e.target.value)}
                             input={<Input/>}
@@ -470,8 +467,6 @@ export const Calculator = () => {
                                 id="standard-adornment-term"
                                 value={term}
                                 onChange={e => sanitiseAndSetTerm(e.target.value)}
-                                style={{color:'white'}}
-
                                 style={{
                                     color:'#ffffff',
                                     fontSize: '4vw',
@@ -491,6 +486,7 @@ export const Calculator = () => {
                         <FormControl size="small">
                             <Select
                             disableUnderline
+                            IconComponent = {"none"}
                             value={frequency}
                             onChange={e => setFrequency(e.target.value)}
                             input={<Input/>}
@@ -525,7 +521,7 @@ export const Calculator = () => {
                         {workOutRepayments(size,rate,term,frequency,repaymentType)}. 
                     </motion.div>
                     <button className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType))}}>
-                        <img src={copy} style={{height:'3vmin', width:'3vmin'}}></img>
+                        <img src={copy} style={{height:'3vmin', width:'3vmin'}} alt="copy"/>
                     </button>
                 
             </motion.div>

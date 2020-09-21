@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import {isMobile} from "react-device-detect";
 import styled from 'styled-components';
 
