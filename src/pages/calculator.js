@@ -66,7 +66,7 @@ const Styles = styled.div`
           `
           :
           `
-          top: calc(15%);
+          top: calc(18%);
           height: calc(60%);
           width: calc(60%);
           `
@@ -86,7 +86,7 @@ const Styles = styled.div`
           `
           :
           `
-          top: calc(80%);
+          top: calc(83%);
           height: calc(10%);
           width: calc(80%);
           `
@@ -104,8 +104,8 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 20%;
-          left: calc(35vw);
+          top: 33%;
+          left: calc(25vw);
           `
         }
         font-weight: bold;
@@ -125,8 +125,8 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 30%;
-          left: calc(35vw);
+          top: 43%;
+          left: calc(25vw);
           `
         }
         font-weight: bold;
@@ -146,8 +146,8 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 40%;
-          left: calc(35vw);
+          top: 53%;
+          left: calc(25vw);
           `
         }
         font-weight: bold;
@@ -167,8 +167,8 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 50%;
-          left: calc(35vw);
+          top: 63%;
+          left: calc(25vw);
           `
         }
         font-weight: bold;
@@ -188,8 +188,8 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 60%;
-          left: calc(35vw);
+          top: 23%;
+          left: calc(25vw);
           `
         }
         font-weight: bold;
@@ -209,7 +209,7 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 80%;
+          top: 83%;
           left: calc(15vw);
           `
         }
@@ -262,10 +262,10 @@ function workOutRepayments(size,rate,term,frequency,repaymentType){
         return "Enter a loan term";
     }
 
-    if(repaymentType == "PI"){
-        return "Your repayments are $" + (PMT(rate/1200,term*12,size)*(12/nPeriods)).toFixed(2) + " " + frequency;
-    }else if(repaymentType == "IO"){
-        return "Your repayments are $" + (size*(rate/100)/nPeriods).toFixed(2) + " " + frequency;
+    if(repaymentType == "principal and interest"){
+        return "Repayments are $" + (PMT(rate/1200,term*12,size)*(12/nPeriods)).toFixed(2) + " " + frequency;
+    }else if(repaymentType == "interest only"){
+        return "Repayments are $" + (size*(rate/100)/nPeriods).toFixed(2) + " " + frequency;
     }else{
         return "Enter a repayment type";
     }
@@ -280,6 +280,11 @@ const possibleFreqs = [
     'annually',
 ];
 
+const possibleRepaymentTypes = [
+    'principal and interest',
+    'interest only',
+];
+
 
 export const Calculator = () => {
     
@@ -287,7 +292,7 @@ export const Calculator = () => {
     const [rate, setRate] = useState(2.29);
     const [term, setTerm] = useState(30);
     const [frequency, setFrequency] = useState("monthly");
-    const [repaymentType, setRepaymentType] = useState("PI");
+    const [repaymentType, setRepaymentType] = useState("principal and interest");
 
     const sanitiseAndSetSize = (size) => {
 
@@ -330,6 +335,19 @@ export const Calculator = () => {
         
     };
 
+    const aOrAn = (repaymentType) => {
+
+        
+        if(repaymentType=="principal and interest"){
+            return;
+        }else if(repaymentType=="interest only"){
+            return "n";
+        }else{
+            return "error";
+        }
+        
+    };
+
     
     
 
@@ -339,13 +357,38 @@ export const Calculator = () => {
             <motion.div className="background"  >
 
                 <motion.div className="title">
-                    Blu 
+                    Blu
                 </motion.div>
                 <motion.div className="inputBoxContainer"/>
                 <motion.div className="outputBoxContainer"/>
                     
+                    <motion.div className="repaymentType">
+                        For a{aOrAn(repaymentType)}
+                        <FormControl >
+                            <Select
+                            value={repaymentType}
+                            onChange={e => setRepaymentType(e.target.value)}
+                            input={<Input/>}
+                            renderValue={(selected) => {
+                                return selected;
+                            }}
+                            inputProps={{ 'aria-label': 'Without label' }}
+                            >
+                                <MenuItem disabled value="">
+                                    <em>Enter repayment type</em>
+                                </MenuItem>
+
+                                {possibleRepaymentTypes.map((possibleRepaymentType) => (
+                                    <MenuItem key={possibleRepaymentType} value={possibleRepaymentType} >
+                                    {possibleRepaymentType}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </motion.div>
+
                     <motion.div className="size">
-                        Loan size :
+                        loan of 
                         <FormControl  >
                             <InputBase
                                 id="standard-adornment-size"
@@ -356,7 +399,7 @@ export const Calculator = () => {
                         </FormControl>
                     </motion.div>
                     <motion.div className="rate">
-                        Rate :
+                        with a rate of 
                         <FormControl>
                             <InputBase
                                 
@@ -368,7 +411,7 @@ export const Calculator = () => {
                         </FormControl>
                     </motion.div>
                     <motion.div className="term">
-                        Loan term :
+                        ,a loan term of
                         <FormControl >
                             <InputBase
                                 id="standard-adornment-term"
@@ -380,6 +423,7 @@ export const Calculator = () => {
                     </motion.div>
                     
                     <motion.div className="frequency">
+                         and repayments made
                         <FormControl >
                             <Select
                             value={frequency}
@@ -403,20 +447,14 @@ export const Calculator = () => {
                         </FormControl>
                     </motion.div>
 
-                    <motion.div className="repaymentType">
-                    <label>
-                        Repayment Type: 
-                        <input type="text" 
-                        value={repaymentType}
-                        onChange={e => setRepaymentType(e.target.value)}
-                        />
-                        
-                    </label>
-                    </motion.div>
+                    
                     
                     <motion.div className="result">
-                        {workOutRepayments(size,rate,term,frequency,repaymentType)}.
+                        {workOutRepayments(size,rate,term,frequency,repaymentType)}. 
                     </motion.div>
+                    <button style={{marginLeft:"50%", marginTop:"32%"}} onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType))}}>
+                        Copy button
+                    </button>
                 
             </motion.div>
            

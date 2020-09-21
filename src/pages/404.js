@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Styles = styled.div`
 
 .background{
-  background: linear-gradient(180deg, rgb(0, 255, 185) 0%, #3ad6b9 100%);
+    background: linear-gradient(180deg, #05f, #09f);
   width: 100vw; 
   height: 100vh;
 }
@@ -22,7 +22,7 @@ const Styles = styled.div`
 
 
 .toptext{
-  font-family: ITCAvantGardeStd;
+  
   ${isMobile ? 
     `
     top: calc(12%);
@@ -39,7 +39,7 @@ const Styles = styled.div`
 }
 
 .subtext{
-  font-family: ITCAvantGardeStd;
+  
   ${isMobile ? 
     `
     top: calc(70%);
