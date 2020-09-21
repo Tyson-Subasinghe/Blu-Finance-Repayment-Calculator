@@ -10,6 +10,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 
+import FilledInput from '@material-ui/core/FilledInput';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import InputBase from '@material-ui/core/InputBase';
+
+
 const Styles = styled.div`
 
     .background{
@@ -19,7 +26,7 @@ const Styles = styled.div`
         align-items: center;
         width: 100vw;
         height: 100vh;
-        background: linear-gradient(180deg, #1784d7 0%, #2094ef 100%);
+        background: linear-gradient(180deg, #05f, #09f);
         background-repeat: no-repeat;
         display: flex;
     }
@@ -338,35 +345,38 @@ export const Calculator = () => {
                 <motion.div className="outputBoxContainer"/>
                     
                     <motion.div className="size">
-                        <label>
-                            Size: $
-                            <input type="number" 
-                            min="0"
-                            value={size}
-                            onChange={e => sanitiseAndSetSize(e.target.value)}
+                        Loan size :
+                        <FormControl  >
+                            <InputBase
+                                id="standard-adornment-size"
+                                value={size}
+                                onChange={e => sanitiseAndSetSize(e.target.value)}
+                                startAdornment={<InputAdornment position="start">$</InputAdornment>}
                             />
-                        </label>
+                        </FormControl>
                     </motion.div>
                     <motion.div className="rate">
-                    <label>
-                        Rate:
-                        <input type="number" 
-                        min="0"
-                        value={rate}
-                        onChange={e => sanitiseAndSetRate(e.target.value)}
-                        />
-                        % p.a.
-                    </label>
+                        Rate :
+                        <FormControl>
+                            <InputBase
+                                
+                                id="standard-adornment-rate"
+                                value={rate}
+                                onChange={e => sanitiseAndSetRate(e.target.value)}
+                                endAdornment={<InputAdornment position="end">% p.a.</InputAdornment>}
+                            />
+                        </FormControl>
                     </motion.div>
                     <motion.div className="term">
-                    <label>
-                        Loan Term:
-                        <input type="number" 
-                        value={term}
-                        onChange={e => sanitiseAndSetTerm(e.target.value)}
-                        />
-                        Years
-                    </label>
+                        Loan term :
+                        <FormControl >
+                            <InputBase
+                                id="standard-adornment-term"
+                                value={term}
+                                onChange={e => sanitiseAndSetTerm(e.target.value)}
+                                endAdornment={<InputAdornment position="end">years</InputAdornment>}
+                            />
+                        </FormControl>
                     </motion.div>
                     
                     <motion.div className="frequency">
