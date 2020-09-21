@@ -8,6 +8,7 @@ import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import IconButton from '@material-ui/core/IconButton';
 
 import InputBase from '@material-ui/core/InputBase';
 
@@ -238,18 +239,18 @@ const Styles = styled.div`
           :
           `
           font-size: calc(2vw);
-          top: calc(88% - 3.5vmin);
-          left: 92%;
+          top: calc(88% - 5vmin);
+          left: calc(93% - 5vmin);
           `
         }
         font-weight: bold;
         display: inline-block;
-        background: white;
+        
         border-radius: 50%;
         position: absolute;
-        width: calc(7vmin);
-        height: calc(7vmin);
-        border: white;
+        width: calc(10vmin);
+        height: calc(10vmin);
+        
         justify-content: center;
         align-items: center;
       }
@@ -308,13 +309,13 @@ function workOutRepayments(size,rate,term,frequency,repaymentType){
         return "Enter a frequency";
     }
 
-    if(term===0){
+    if(term==0){
         return "Enter a loan term";
     }
 
-    if(repaymentType === "principal and interest"){
+    if(repaymentType == "principal and interest"){
         return "Repayments are $" + (PMT(rate/1200,term*12,size)*(12/nPeriods)).toFixed(2) + " " + frequency;
-    }else if(repaymentType === "interest only"){
+    }else if(repaymentType == "interest only"){
         return "Repayments are $" + (size*(rate/100)/nPeriods).toFixed(2) + " " + frequency;
     }else{
         return "Enter a repayment type";
@@ -529,11 +530,11 @@ export const Calculator = () => {
                     
                     
                     <motion.div className="result">
-                        {workOutRepayments(size,rate,term,frequency,repaymentType)}. 
+                        {workOutRepayments(size,rate,term,frequency,repaymentType)}
                     </motion.div>
-                    <button className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType))}}>
-                        <img src={copy} style={{height:'3vmin', width:'3vmin'}} alt="copy"/>
-                    </button>
+                    <IconButton className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType))}}>
+                        <img src={copy} style={{height:'4vmin', width:'4vmin'}} alt="copy"/>
+                    </IconButton>
                 
             </motion.div>
            
