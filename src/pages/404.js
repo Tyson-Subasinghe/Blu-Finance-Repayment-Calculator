@@ -80,21 +80,14 @@ const Styles = styled.div`
 
 export const NoMatch = () => {    
     
-    
     return(
-
         <Styles>
           <div className="background">
             <motion.div className="container" >
-
-                <motion.div className="title">
-                    Blu
-                </motion.div>
                 <div>
                   <p className="toptext">No other pages :(</p>
-                  <p className="subtext">This website only contains the calculator</p>
+                  <p className="subtext">This website only contains the calculator and conditions</p>
                 </div>
-
             </motion.div>
           </div>
         </Styles>

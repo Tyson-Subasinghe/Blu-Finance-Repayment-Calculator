@@ -994,8 +994,6 @@ export const Calculator = () => {
                             
                         </motion.div>
 
-                        
-
                         <motion.div
                         initial={{
                             opacity: 0,
