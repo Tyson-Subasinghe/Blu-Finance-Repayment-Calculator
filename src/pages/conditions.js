@@ -20,29 +20,6 @@ const Styles = styled.div`
   height: 100vh;
 }
 
-.title{
-        
-    position: absolute;
-    z-index: 2;
-    color: white;
-    ${isMobile ? 
-      `    
-      font-size: calc(8vh);
-      top: 0;
-      left: calc(39vw);
-      `
-      :
-      `
-      font-size: calc(8vw);
-      top: 0;
-      `
-    }
-    font-family: Aileron;
-    font-weight: bolder;
-    justify-content: center;
-    align-items: center;
-    display: inline-block;
-  }
 
 .toptext{
   
@@ -87,15 +64,13 @@ export const Conditions = () => {
           <div className="background">
             <motion.div className="container" >
 
-                <motion.div className="title">
-                    Blu
-                </motion.div>
+                
                 
                   <BrowserView>
                     <p className="toptext" style={{ position: 'absolute', marginTop: '10%', marginLeft: '-3ch',}}>Disclaimer</p>
                     <p className="subtext" style={{ position: 'absolute', width: '80%', marginLeft: '-38%', marginTop: '-10%', fontSize: '2vw'}}>
 
-                    A few things to keep in mind. This calculator is only a guide. To get the right home loan advice speak to a broker. They’ll be able to help you find the right loan in amongst thousands across the market.
+                    <span style={{color:'white'}}>A few things to keep in mind.</span> This calculator is only a guide. To get the right home loan advice speak to a broker. They’ll be able to help you find the right loan in amongst thousands across the market.
 
                     By using this mortgage calculator application you accept the terms and conditions. Applications made through your bank or broker are subject to approval and this calculation does not represent a loan approval. Conditions, fees and charges will apply.
 
@@ -109,9 +84,9 @@ export const Conditions = () => {
                   
                   <MobileView>
                     <h1  style={{ position: 'absolute', marginTop: '-80%', marginLeft: '-30%',}}>Disclaimer</h1>
-                    <p  style={{ position: 'absolute', width: '80%', marginTop: '-45%', marginLeft: '-38%', fontSize: '2vh'}}>
+                    <p  style={{ position: 'absolute', width: '80%', marginTop: '-45%', marginLeft: '-38%', fontSize: '2vh', justifyContent: 'center'}} >
 
-                    A few things to keep in mind. This calculator is only a guide. To get the right home loan advice speak to a broker. They’ll be able to help you find the right loan in amongst thousands across the market.
+                    <span style={{color:'white'}}>A few things to keep in mind.</span> This calculator is only a guide. To get the right home loan advice speak to a broker. They’ll be able to help you find the right loan in amongst thousands across the market.
 
                     By using this mortgage calculator application you accept the terms and conditions. Applications made through your bank or broker are subject to approval and this calculation does not represent a loan approval. Conditions, fees and charges will apply.
 
