@@ -15,6 +15,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import InputBase from '@material-ui/core/InputBase';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 const Styles = styled.div`
@@ -219,7 +220,42 @@ const Styles = styled.div`
         display: inline-block;
       }
 
+      .copyButton{
+        position: absolute;
+        z-index: 2;
+        ${isMobile ? 
+          `    
+          font-size: calc(4vh);
+          left: calc(25vw);
+          `
+          :
+          `
+          font-size: calc(2vw);
+          top: 85%;
+          left: 81%;
+          `
+        }
+        font-weight: bold;
+        justify-content: center;
+        align-items: center;
+        display: inline-block;
+      }
+
 `;
+
+const possibleFreqs = [
+    'weekly',
+    'fortnightly',
+    'monthly',
+    'annually',
+];
+
+const possibleRepaymentTypes = [
+    'principal and interest',
+    'interest only',
+];
+
+
 
 //Code sourced from https://stackoverflow.com/questions/5294074/pmt-function-in-javascript 
 function PMT(rate, nperiod, pv, fv, type) {
@@ -242,7 +278,6 @@ function PMT(rate, nperiod, pv, fv, type) {
 
 function workOutRepayments(size,rate,term,frequency,repaymentType){
 
-    
     var nPeriods ; //nPeriods is the number of periods based on frequency, default is 12
 
     if(frequency==="annually"){
@@ -272,18 +307,6 @@ function workOutRepayments(size,rate,term,frequency,repaymentType){
     
 }
 
-
-const possibleFreqs = [
-    'weekly',
-    'fortnightly',
-    'monthly',
-    'annually',
-];
-
-const possibleRepaymentTypes = [
-    'principal and interest',
-    'interest only',
-];
 
 
 export const Calculator = () => {
@@ -324,8 +347,8 @@ export const Calculator = () => {
 
     const sanitiseAndSetTerm = (term) => {
 
-        if(term>40){
-            setTerm(40);
+        if(term>30){
+            setTerm(30);
         }
         else if(term<0){
             setTerm(0);
@@ -364,8 +387,9 @@ export const Calculator = () => {
                     
                     <motion.div className="repaymentType">
                         For a{aOrAn(repaymentType)}
-                        <FormControl >
+                        <FormControl size="small">
                             <Select
+                            disableUnderline
                             value={repaymentType}
                             onChange={e => setRepaymentType(e.target.value)}
                             input={<Input/>}
@@ -373,7 +397,12 @@ export const Calculator = () => {
                                 return selected;
                             }}
                             inputProps={{ 'aria-label': 'Without label' }}
-                            >
+                            style={{
+                                color:'#ffffff',
+                                fontSize: '4vw',
+                                fontWeight: 'bold',
+                                marginLeft: '0.25em',
+                            }}>
                                 <MenuItem disabled value="">
                                     <em>Enter repayment type</em>
                                 </MenuItem>
@@ -388,44 +417,70 @@ export const Calculator = () => {
                     </motion.div>
 
                     <motion.div className="size">
-                        loan of 
-                        <FormControl  >
+                        loan of $
+                        <FormControl size="small">
                             <InputBase
                                 id="standard-adornment-size"
                                 value={size}
                                 onChange={e => sanitiseAndSetSize(e.target.value)}
-                                startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                                style={{
+                                    color:'#ffffff',
+                                    fontSize: '4vw',
+                                    fontWeight: 'bold',
+    
+                                }}
                             />
                         </FormControl>
                     </motion.div>
                     <motion.div className="rate">
                         with a rate of 
-                        <FormControl>
+                        <FormControl size="small">
                             <InputBase
                                 
                                 id="standard-adornment-rate"
                                 value={rate}
                                 onChange={e => sanitiseAndSetRate(e.target.value)}
-                                endAdornment={<InputAdornment position="end">% p.a.</InputAdornment>}
+                                style={{
+                                    color:'#ffffff',
+                                    fontSize: '4vw',
+                                    fontWeight: 'bold',
+                                    marginLeft: '0.25em',
+                                    width: "3.6ch",
+                                }}
+                                
+                                
                             />
                         </FormControl>
+                        % p.a.
                     </motion.div>
                     <motion.div className="term">
-                        ,a loan term of
-                        <FormControl >
-                            <InputBase
+                        a loan term of
+                        <FormControl size="small">
+                            <InputBase 
                                 id="standard-adornment-term"
                                 value={term}
                                 onChange={e => sanitiseAndSetTerm(e.target.value)}
-                                endAdornment={<InputAdornment position="end">years</InputAdornment>}
+                                style={{color:'white'}}
+
+                                style={{
+                                    color:'#ffffff',
+                                    fontSize: '4vw',
+                                    fontWeight: 'bold',
+                                    marginLeft: '0.25em',
+                                    width: '2.5ch',
+                                }}
+                                
+
                             />
                         </FormControl>
+                         years
                     </motion.div>
                     
                     <motion.div className="frequency">
-                         and repayments made
-                        <FormControl >
+                         and repayments
+                        <FormControl size="small">
                             <Select
+                            disableUnderline
                             value={frequency}
                             onChange={e => setFrequency(e.target.value)}
                             input={<Input/>}
@@ -433,6 +488,13 @@ export const Calculator = () => {
                                 return selected;
                             }}
                             inputProps={{ 'aria-label': 'Without label' }}
+                            style={{
+                                color:'#ffffff',
+                                fontSize: '4vw',
+                                fontWeight: 'bold',
+                                marginLeft: '0.25em',
+                                
+                            }}
                             >
                                 <MenuItem disabled value="">
                                     <em>Enter frequency</em>
@@ -452,7 +514,7 @@ export const Calculator = () => {
                     <motion.div className="result">
                         {workOutRepayments(size,rate,term,frequency,repaymentType)}. 
                     </motion.div>
-                    <button style={{marginLeft:"50%", marginTop:"32%"}} onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType))}}>
+                    <button className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType))}}>
                         Copy button
                     </button>
                 
