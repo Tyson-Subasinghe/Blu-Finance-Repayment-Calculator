@@ -24,9 +24,10 @@ const Styles = styled.div`
         display: flex;
     }
 
-    .size{
+    .title{
         position: absolute;
         z-index: 2;
+        color: white;
         ${isMobile ? 
           `    
           font-size: calc(4vh);
@@ -34,9 +35,9 @@ const Styles = styled.div`
           `
           :
           `
-          font-size: calc(4vw);
-          top: 10%;
-          left: calc(35vw);
+          font-size: calc(8vw);
+          top: -1%;
+          left: calc(45vw);
           `
         }
         font-weight: bold;
@@ -45,7 +46,47 @@ const Styles = styled.div`
         display: inline-block;
       }
 
-      .rate{
+    .inputBoxContainer {
+        position: absolute;
+        display: flex;
+        overflow: show;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50px;
+        ${isMobile ?
+          `
+          top: calc(25%);
+          
+          `
+          :
+          `
+          top: calc(15%);
+          height: calc(60%);
+          width: calc(60%);
+          `
+        }
+    }
+
+    .outputBoxContainer {
+        position: absolute;
+        display: flex;
+        overflow: show;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 25px;
+        ${isMobile ?
+          `
+          top: calc(25%);
+          
+          `
+          :
+          `
+          top: calc(80%);
+          height: calc(10%);
+          width: calc(80%);
+          `
+        }
+    }
+
+    .size{
         position: absolute;
         z-index: 2;
         ${isMobile ? 
@@ -66,7 +107,7 @@ const Styles = styled.div`
         display: inline-block;
       }
 
-      .term{
+      .rate{
         position: absolute;
         z-index: 2;
         ${isMobile ? 
@@ -87,7 +128,7 @@ const Styles = styled.div`
         display: inline-block;
       }
 
-      .frequency{
+      .term{
         position: absolute;
         z-index: 2;
         ${isMobile ? 
@@ -108,7 +149,7 @@ const Styles = styled.div`
         display: inline-block;
       }
 
-      .repaymentType{
+      .frequency{
         position: absolute;
         z-index: 2;
         ${isMobile ? 
@@ -129,6 +170,27 @@ const Styles = styled.div`
         display: inline-block;
       }
 
+      .repaymentType{
+        position: absolute;
+        z-index: 2;
+        ${isMobile ? 
+          `    
+          font-size: calc(4vh);
+          left: calc(25vw);
+          `
+          :
+          `
+          font-size: calc(4vw);
+          top: 60%;
+          left: calc(35vw);
+          `
+        }
+        font-weight: bold;
+        justify-content: center;
+        align-items: center;
+        display: inline-block;
+      }
+
       .result{
         position: absolute;
         z-index: 2;
@@ -140,7 +202,7 @@ const Styles = styled.div`
           :
           `
           font-size: calc(4vw);
-          top: 70%;
+          top: 80%;
           left: calc(15vw);
           `
         }
@@ -235,8 +297,8 @@ export const Calculator = () => {
 
     const sanitiseAndSetRate = (rate) => {
 
-        if(rate>100){
-            setRate(100);
+        if(rate>30){
+            setRate(30);
         }
         else if(rate<0){
             setRate(0);
@@ -269,78 +331,83 @@ export const Calculator = () => {
         <Styles>
             <motion.div className="background"  >
 
-                
-                
-                
-                <motion.div className="size">
+                <motion.div className="title">
+                    Blu 
+                </motion.div>
+                <motion.div className="inputBoxContainer"/>
+                <motion.div className="outputBoxContainer"/>
+                    
+                    <motion.div className="size">
+                        <label>
+                            Size: $
+                            <input type="number" 
+                            min="0"
+                            value={size}
+                            onChange={e => sanitiseAndSetSize(e.target.value)}
+                            />
+                        </label>
+                    </motion.div>
+                    <motion.div className="rate">
                     <label>
-                        Size: $
+                        Rate:
                         <input type="number" 
                         min="0"
-                        value={size}
-                        onChange={e => sanitiseAndSetSize(e.target.value)}
+                        value={rate}
+                        onChange={e => sanitiseAndSetRate(e.target.value)}
                         />
+                        % p.a.
                     </label>
-                </motion.div>
-                <motion.div className="rate">
-                <label>
-                    Rate:
-                    <input type="number" 
-                    min="0"
-                    value={rate}
-                    onChange={e => sanitiseAndSetRate(e.target.value)}
-                    />
-                    % p.a.
-                </label>
-                </motion.div>
-                <motion.div className="term">
-                <label>
-                    Loan Term:
-                    <input type="number" 
-                    value={term}
-                    onChange={e => sanitiseAndSetTerm(e.target.value)}
-                    />
-                    Years
-                </label>
-                </motion.div>
-                <motion.div className="frequency">
-                    <FormControl >
-                        <Select
-                        value={frequency}
-                        onChange={e => setFrequency(e.target.value)}
-                        input={<Input/>}
-                        renderValue={(selected) => {
-                            return selected;
-                        }}
-                        inputProps={{ 'aria-label': 'Without label' }}
-                        >
-                            <MenuItem disabled value="">
-                                <em>Enter frequency</em>
-                            </MenuItem>
-
-                            {possibleFreqs.map((possibleFreq) => (
-                                <MenuItem key={possibleFreq} value={possibleFreq} >
-                                {possibleFreq}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </motion.div>
-                <motion.div className="repaymentType">
-                <label>
-                    Repayment Type: 
-                    <input type="text" 
-                    value={repaymentType}
-                    onChange={e => setRepaymentType(e.target.value)}
-                    />
+                    </motion.div>
+                    <motion.div className="term">
+                    <label>
+                        Loan Term:
+                        <input type="number" 
+                        value={term}
+                        onChange={e => sanitiseAndSetTerm(e.target.value)}
+                        />
+                        Years
+                    </label>
+                    </motion.div>
                     
-                </label>
-                </motion.div>
-                
-                <motion.div className="result">
-                    {workOutRepayments(size,rate,term,frequency,repaymentType)}.
-                </motion.div>
+                    <motion.div className="frequency">
+                        <FormControl >
+                            <Select
+                            value={frequency}
+                            onChange={e => setFrequency(e.target.value)}
+                            input={<Input/>}
+                            renderValue={(selected) => {
+                                return selected;
+                            }}
+                            inputProps={{ 'aria-label': 'Without label' }}
+                            >
+                                <MenuItem disabled value="">
+                                    <em>Enter frequency</em>
+                                </MenuItem>
 
+                                {possibleFreqs.map((possibleFreq) => (
+                                    <MenuItem key={possibleFreq} value={possibleFreq} >
+                                    {possibleFreq}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </motion.div>
+
+                    <motion.div className="repaymentType">
+                    <label>
+                        Repayment Type: 
+                        <input type="text" 
+                        value={repaymentType}
+                        onChange={e => setRepaymentType(e.target.value)}
+                        />
+                        
+                    </label>
+                    </motion.div>
+                    
+                    <motion.div className="result">
+                        {workOutRepayments(size,rate,term,frequency,repaymentType)}.
+                    </motion.div>
+                
             </motion.div>
            
         </Styles>
