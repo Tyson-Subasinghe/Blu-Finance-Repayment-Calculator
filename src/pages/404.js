@@ -92,7 +92,7 @@ export const NoMatch = () => {
                 </motion.div>
                 <div>
                   <p className="toptext">No other pages :(</p>
-                  <p className="subtext">This website only contains one page</p>
+                  <p className="subtext">This website only contains the calculator</p>
                 </div>
 
             </motion.div>

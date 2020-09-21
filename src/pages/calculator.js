@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 
 import copy from '../assets/copy.png';
+import info from '../assets/info.png';
 
 
 const Styles = styled.div`
@@ -272,7 +273,7 @@ const Styles = styled.div`
             `    
             font-size: calc(2vh);
             top: calc(96.5% - 5vh);
-            left: calc(50% - 5vh);
+            left: calc(75% - 5vh);
             width: calc(10vh);
             height: calc(10vh);
             `
@@ -291,6 +292,33 @@ const Styles = styled.div`
         position: absolute;
         
         
+        justify-content: center;
+        align-items: center;
+      }
+
+      .infoButton{
+        position: absolute;
+        z-index: 2;
+        ${isMobile ? 
+            `    
+            font-size: calc(2vh);
+            top: calc(98% - 5vh);
+            left: calc(25% - 5vh);
+            width: calc(8vh);
+            height: calc(8vh);
+            `
+            :
+            `
+            font-size: calc(2vw);
+            top: calc(18% + 2vh);
+            left: calc(80% - 11vh);
+            width: calc(5vh);
+            height: calc(5vh);
+            `
+        }
+        display: inline-block;
+        border-radius: 50%;
+        position: absolute;
         justify-content: center;
         align-items: center;
       }
@@ -656,9 +684,42 @@ export const Calculator = () => {
                                 </Select>
                             </FormControl>
                         </motion.div>
-                        <IconButton className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType)+" "+frequency)}}>
-                            <img src={copy} style={{height:'4vmin', width:'4vmin'}} alt="copy"/>
-                        </IconButton>
+                        <motion.div
+                        initial={{
+                            opacity: 0,
+                          
+                        }}
+                        animate={{
+                            opacity: 1,
+                           
+                        }}
+                        transition={{
+                            delay: 0.6,
+                            duration: 0.5
+                        }}>
+                            <IconButton className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType)+" "+frequency)}}>
+                                <img src={copy} style={{height:'4vmin', width:'4vmin'}} alt="copy"/>
+                            </IconButton>
+                        </motion.div>
+                        
+                        <motion.div
+                        initial={{
+                            opacity: 0,
+                          
+                        }}
+                        animate={{
+                            opacity: 1,
+                           
+                        }}
+                        transition={{
+                            delay: 0.5,
+                            duration: 0.5
+                        }}>
+                            <IconButton className="infoButton" href={"/conditions"}>
+                                <img src={info} style={{height:'4vmin', width:'4vmin', marginTop: '0.5vmin'}} alt="info"/>
+                            </IconButton>
+                        </motion.div>
+                        
                     </BrowserView>
 
 
@@ -933,9 +994,29 @@ export const Calculator = () => {
                             
                         </motion.div>
 
-                        <IconButton className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType)+" "+frequency)}}>
-                            <img src={copy} style={{height:'4vh', width:'4vh'}} alt="copy"/>
-                        </IconButton>
+                        
+
+                        <motion.div
+                        initial={{
+                            opacity: 0,
+                          
+                        }}
+                        animate={{
+                            opacity: 1,
+                           
+                        }}
+                        transition={{
+                            delay: 1,
+                            duration: 0.5
+                        }}>
+                            <IconButton className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType)+" "+frequency)}}>
+                                <img src={copy} style={{height:'4vh', width:'4vh'}} alt="copy"/>
+                            </IconButton>
+                            <IconButton className="infoButton" href={"/conditions"}>
+                                <img src={info} style={{height:'4vh', width:'4vh'}} alt="info"/>
+                            </IconButton>
+                        </motion.div>
+
                     </MobileView>
                 
             </motion.div>
