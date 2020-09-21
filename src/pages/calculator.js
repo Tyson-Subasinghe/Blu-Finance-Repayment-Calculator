@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 import styled from 'styled-components';
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import {isMobile} from "react-device-detect";
 
 import Input from '@material-ui/core/Input';
@@ -16,6 +16,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import InputBase from '@material-ui/core/InputBase';
 import { makeStyles } from '@material-ui/core/styles';
+import copy from '../assets/copy.png';
 
 
 const Styles = styled.div`
@@ -231,15 +232,23 @@ const Styles = styled.div`
           :
           `
           font-size: calc(2vw);
-          top: 85%;
-          left: 81%;
+          top: calc(88% - 3.5vmin);
+          left: 92%;
           `
         }
         font-weight: bold;
+        display: inline-block;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        width: calc(7vmin);
+        height: calc(7vmin);
+        border: white;
         justify-content: center;
         align-items: center;
-        display: inline-block;
       }
+
+      
 
 `;
 
@@ -316,6 +325,7 @@ export const Calculator = () => {
     const [term, setTerm] = useState(30);
     const [frequency, setFrequency] = useState("monthly");
     const [repaymentType, setRepaymentType] = useState("principal and interest");
+    
 
     const sanitiseAndSetSize = (size) => {
 
@@ -515,7 +525,7 @@ export const Calculator = () => {
                         {workOutRepayments(size,rate,term,frequency,repaymentType)}. 
                     </motion.div>
                     <button className="copyButton" onClick={() => {navigator.clipboard.writeText(workOutRepayments(size,rate,term,frequency,repaymentType))}}>
-                        Copy button
+                        <img src={copy} style={{height:'3vmin', width:'3vmin'}}></img>
                     </button>
                 
             </motion.div>
