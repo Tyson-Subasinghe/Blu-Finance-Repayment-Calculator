@@ -2,8 +2,12 @@ import React from 'react';
 import {useState} from 'react';
 import styled from 'styled-components';
 import { motion, useMotionValue } from "framer-motion";
-import {Dropdown} from 'react-bootstrap';
 import {isMobile} from "react-device-detect";
+
+import Input from '@material-ui/core/Input';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 const Styles = styled.div`
@@ -169,28 +173,43 @@ function PMT(rate, nperiod, pv, fv, type) {
 
 function workOutRepayments(size,rate,term,frequency,repaymentType){
 
+    
+    var nPeriods ; //nPeriods is the number of periods based on frequency, default is 12
+
     if(frequency==="annually"){
-        frequency = 1;
+        nPeriods = 1;
     } 
     else if(frequency==="monthly"){
-        frequency = 12;
+        nPeriods = 12;
     }else if(frequency==="fortnightly"){
-        frequency = 26;
+        nPeriods = 26;
     }else if(frequency==="weekly"){
-        frequency = 52;
+        nPeriods = 52;
     }else {
-        frequency = 0;
+        return "Enter a frequency";
+    }
+
+    if(term==0){
+        return "Enter a loan term";
     }
 
     if(repaymentType == "PI"){
-        return PMT(rate/1200,term*12,size).toFixed(2)*(12/frequency);
+        return "Your repayments are $" + (PMT(rate/1200,term*12,size)*(12/nPeriods)).toFixed(2) + " " + frequency;
     }else if(repaymentType == "IO"){
-        return size*(rate/100)/frequency;
+        return "Your repayments are $" + (size*(rate/100)/nPeriods).toFixed(2) + " " + frequency;
     }else{
-        return "Error";
+        return "Enter a repayment type";
     }
     
 }
+
+
+const possibleFreqs = [
+    'weekly',
+    'fortnightly',
+    'monthly',
+    'annually',
+];
 
 
 export const Calculator = () => {
@@ -241,6 +260,8 @@ export const Calculator = () => {
         }
         
     };
+
+    
     
 
     return(
@@ -283,14 +304,27 @@ export const Calculator = () => {
                 </label>
                 </motion.div>
                 <motion.div className="frequency">
-                <label>
-                    Repayment frequency: 
-                    <input type="text" 
-                    value={frequency}
-                    onChange={e => setFrequency(e.target.value)}
-                    />
-                    
-                </label>
+                    <FormControl >
+                        <Select
+                        value={frequency}
+                        onChange={e => setFrequency(e.target.value)}
+                        input={<Input/>}
+                        renderValue={(selected) => {
+                            return selected;
+                        }}
+                        inputProps={{ 'aria-label': 'Without label' }}
+                        >
+                            <MenuItem disabled value="">
+                                <em>Enter frequency</em>
+                            </MenuItem>
+
+                            {possibleFreqs.map((possibleFreq) => (
+                                <MenuItem key={possibleFreq} value={possibleFreq} >
+                                {possibleFreq}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                 </motion.div>
                 <motion.div className="repaymentType">
                 <label>
@@ -304,7 +338,7 @@ export const Calculator = () => {
                 </motion.div>
                 
                 <motion.div className="result">
-                    Your repayments are ${workOutRepayments(size,rate,term,frequency,repaymentType)} {frequency}.
+                    {workOutRepayments(size,rate,term,frequency,repaymentType)}.
                 </motion.div>
 
             </motion.div>

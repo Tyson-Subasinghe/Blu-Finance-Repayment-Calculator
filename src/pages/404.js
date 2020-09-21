@@ -68,8 +68,7 @@ export const NoMatch = () => {
                   <p className="toptext">No page found :(</p>
                   <p className="subtext">Sorry about that</p>
                 </div>
-                
-               
+
             </motion.div>
           </div>
         </Styles>
