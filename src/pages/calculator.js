@@ -248,17 +248,20 @@ const Styles = styled.div`
             `    
             font-size: calc(4vh);
             top: 81%;
-            left: calc(50% - 7ch);
+            width: 100%;
+            margin-left: -49%;
             `
             :
             `
             font-size: calc(4vw);
             top: 83%;
+            width: 100%;
+            margin-left: -49%;
             `
         }
         font-weight: bold;
-        justify-content: center;
-        align-items: center;
+        overflow: hidden;
+        text-align: center;
         display: inline-block;
     }
 
